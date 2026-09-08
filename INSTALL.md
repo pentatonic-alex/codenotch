@@ -47,6 +47,19 @@ make build DEV_SIGN='CODE_SIGN_IDENTITY=- DEVELOPMENT_TEAM= CODE_SIGN_STYLE=Auto
 Then copy the built `Codenotch.app` from `DerivedData/.../Debug/` into
 `/Applications`.
 
+### Keychain prompt keeps coming back?
+
+A self-built (ad-hoc) app has no stable code identity, so macOS re-asks for the
+keychain token on every launch even after you click **Always Allow**. Sign it
+once with a stable self-signed identity to make the grant stick:
+
+```sh
+Scripts/sign-local.sh   # signs /Applications/Codenotch.app
+```
+
+No Apple Developer account needed. Grant the prompt one more time after signing;
+it won't ask again. (Not needed if you install from the DMG above.)
+
 ## What it reads (security)
 
 Codenotch reads each installed tool's own auth (Claude Code, Cursor, Codex,
